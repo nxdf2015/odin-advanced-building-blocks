@@ -6,16 +6,14 @@ def bubble_sort(array)
   (array.length).times {
   i = 0
   while i < array.length-1  do
-       y = array[i+1]
-       x = array[i]
-       array[i+1],array[i] = x , y  if y < x
+       x , y = array[i,2]
+       array[i,2] = array[i,2].reverse  if y < x
        i+=1
-
  end}
 array
 
 end
 
- a = (1..20).to_a.shuffle
-
-  p %W/ #{bubble_sort(a)} #{a} /
+ # a = (1..20).to_a.shuffle
+ #
+ #  p %W/ #{bubble_sort(a)} #{a} /
