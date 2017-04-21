@@ -13,5 +13,4 @@ array
 end
 
 
- # a = (1..20).to_a.shuffle
- # p %Q/ array sorted#{bubble_sort(a)}     #{a} /
+ 

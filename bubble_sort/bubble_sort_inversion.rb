@@ -16,7 +16,3 @@ def bubble_sort(array)
    end until sorted
    array
 end
- # 
- # a = (1..20).to_a
- #
- #  p %W/ #{bubble_sort(a)} #{a} /
