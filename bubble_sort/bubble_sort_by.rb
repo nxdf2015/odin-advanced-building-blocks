@@ -11,6 +11,6 @@ def bubble_sort_by(array)
   array
   end
 
-a = (1..10).to_a.shuffle
-p a
-p bubble_sort_by(a ) {|x,y| x > y ? 1 : -1 }
+# a = (1..10).to_a.shuffle
+# p a
+# p bubble_sort_by(a ) {|x,y| x > y ? 1 : -1 }
