@@ -1,32 +1,13 @@
-module Helper
-  def helper
-    if self.is_a? Hash
-      a = self.to_a
-    elsif self.is_a? Array
-      a =self
-    end
-    return Proc.new do |i|
-         case(self.class.inspect)
-            when  "Hash"
-                 a[i]
-            when "Array"
-               a[i]
-           end
-      end
-  end
-
-end
-
 
 
 module Enumerable
-  include Helper
   def my_each
     raise SyntaxError unless block_given?
-    f = helper
+    f = self.to_a
     i = 0
+    p f
     while i < self.length do
-        yield(f.call(i))
+        yield(f[i])
         i+=1
     end
   end
