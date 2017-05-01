@@ -3,7 +3,7 @@
 def bubble_sort(array)
 
   array = array.clone
-  (array.length).times {|pos|
+  (array.length - 1 ).times {|pos|
   i = 0
    begin
      p  = array[i,2]
