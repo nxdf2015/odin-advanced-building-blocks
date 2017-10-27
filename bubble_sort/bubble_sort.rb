@@ -1,6 +1,9 @@
 #!/usr/bin/ruby
+
+
 def bubble_sort(array)
   n = array.size
+  array = array.clone
   inversion = true
   while n > 0 && inversion
   inversion = false
@@ -13,3 +16,4 @@ def bubble_sort(array)
   end
 array
 end 
+
