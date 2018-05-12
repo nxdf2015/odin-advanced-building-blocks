@@ -1,19 +1,52 @@
-#!/usr/bin/ruby
+
+def bubble_sort(arr)
+    size = arr.length 
+    invert = true
+    i = 0
+    while invert 
+        invert = false        
+        (0..size-2).each do |j|
+            if arr[j] > arr[j.succ ]
+               invert = true
+               arr[j+1] , arr[j] = arr[j] , arr[j+1]             
+            end        
+        end        
+    end
+
+   arr
+end
 
 
-def bubble_sort(array)
-  n = array.size
-  array = array.clone
-  inversion = true
-  while n > 0 && inversion
-  inversion = false
-     (n-1).times do |i|
-         p = array[i,2] 
-         inversion = p[0] > p[1]
-         array[i,2] = p.reverse if inversion 
-      end
-  n-=1
-  end
-array
-end 
+#with a block
+def bubble_sort_by(arr)    
+    size = arr.length
+    invert = true
+    begin
+        invert = true        
+        (0..size-2).each do |j|
+            if yield(arr[j],arr[j + 1 ] )
+               invert = false
+               arr[j+1] , arr[j] = arr[j] , arr[j+1]             
+            end 
+        end
+      
+    end until invert
+    arr
+end
 
+
+def generate(size = 20)
+    (1..size).to_a.map do 
+        rand(50) end
+end
+
+
+
+
+data =  generate
+p  data 
+
+
+p bubble_sort_by(data) { |a,b| 
+   a > b
+}
