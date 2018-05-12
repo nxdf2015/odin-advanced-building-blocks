@@ -35,6 +35,8 @@ def bubble_sort_by(arr)
 end
 
 
+
+
 def generate(size = 20)
     (1..size).to_a.map do 
         rand(50) end
@@ -43,10 +45,11 @@ end
 
 
 
-data =  generate
-p  data 
 
 
-p bubble_sort_by(data) { |a,b| 
-   a > b
+
+bubble_sort(generate)
+
+bubble_sort_by(["hi","hello","hey"]) { |a,b| 
+   a.length > b.length
 }
