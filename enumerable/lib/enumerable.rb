@@ -1,85 +1,82 @@
 
 
-module Enumerable
-  def my_each
-    raise SyntaxError unless block_given?
-    f = self.to_a
-    i = 0
-    p f
-    while i < self.length do
-        yield(f[i])
-        i+=1
+
+module Enumerable 
+     
+    
+
+    def my_each(&bloc)                
+        for item in self  
+            yield(item)
+        end
+        
     end
-  end
 
-  def my_each_with_index
-      raise SyntaxError unless block_given?
-    a = (0...self.length).to_a.zip(self)
-    a.my_each {|i,x| yield(i,x)}
-  end
-
-  def my_select
-      raise SyntaxError unless block_given?
-    r = []
-    self.my_each do |x| r <<x if yield(x) end
-    r
-  end
-
-  def my_all?
-      raise SyntaxError unless block_given?
-    t = true
-    self.my_each do |x| t &&= yield(x) end
-    t
-  end
-  def my_any?
-      raise SyntaxError unless block_given?
-    t = false
-    self.my_each do |x| t ||= yield(x) end
-    t
-  end
-
-  def my_none?
-      raise SyntaxError unless block_given?
-    t = false
-    self.my_each do |x| t ||= yield(x) end
-    t == false
-  end
-
-  def my_count
-    count = 0
-    if block_given?
-      self.my_each do |x| count+= 1 if  yield(x)  end
-      count
-    else
-      self.my_each do  count+= 1   end
-      count
+    def my_each_with_index 
+        (0..self.length).my_each do |i|
+            yield(i,self[i])
+        end
     end
-  end
 
-  def my_map(p = nil)
-    r  = []
-    if p.is_a? Proc
-        self.my_each do |x| r <<  p.call(x) end
-    else
-        raise SyntaxError unless block_given?
-        self.my_each do |x| r <<  yield(x) end
+    def my_select 
+        r = []
+       self.my_each { |x| p x ; r <<x   if yield(x) }
+       r 
     end
-    r
-  end
 
-  def my_inject(init = 0 )
-    raise SyntaxError unless block_given?
-    r  = init
-    self.my_each do |x| r =  yield(r , x) end
-    r
-  end
+    def my_all?(&block)     
+        self.eql? (self.select &block)
+    end
+
+    def my_any?
+        i = 0
+        size = self.length
+        while i < size do                 
+            break if yield(self[i])
+            i += 1
+    end
+        not(i == size)
+    end
+
+
+    def my_none?(&block)
+        not self.my_any? &block
+    end
+
+    def my_count(&block)
+        return self.length unless block_given?  
+        (self.select &block).length
+
+    end
+
+    def my_map(bloc = nil)
+        f = Proc.new {|x| 
+        if block_given? 
+            yield(x)
+        elsif bloc.is_a? Proc
+            bloc.call(x)
+        end      
+        }
+
+        t = []
+        for x in self
+            t <<  f.call(x) 
+        end
+        t
+    
+    end
+
+    def my_inject(init = 0 )
+        acc = init
+        self.each do |x|  acc = yield(acc,x) end   
+        acc         
+    end
+end
+
+def multiply_els(arr)
+    arr.my_inject(1) { |acc,x| acc * x}
 end
 
 
-class Hash
-  include Enumerable
-end
 
-class Array
-   include Enumerable
- end
+ 

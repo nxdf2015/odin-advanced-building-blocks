@@ -4,12 +4,12 @@ describe "#my_map" do
 
   before { @array = [1,2,3,4]}
 
-   context "given no  block or no proc then i receive an error " do
+  #  context "given no  block or no proc then i receive an error " do
 
-     it "given  no proc and no  block given then i receive  an error " do
-       expect{ @array.my_map}.to raise_error SyntaxError
-     end
-   end
+  #    it "given  no proc and no  block given then i receive  an error " do
+  #      expect{ @array.my_map}.to raise_error SyntaxError
+  #    end
+  #  end
 
    context "given a block " do
 
